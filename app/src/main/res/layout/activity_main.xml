@@ -5,17 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:windowSoftInputMode="stateAlwaysHidden">
 
     <EditText
         android:id="@+id/searchRestaurant"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:hint="Enter City Name"
-        android:textColorHint="#670b19"
         android:imeOptions="actionDone"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:textColorHint="#670b19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/searchView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_search_black_24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="@id/searchRestaurant"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

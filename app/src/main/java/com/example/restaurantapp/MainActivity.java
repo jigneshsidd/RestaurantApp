@@ -1,10 +1,16 @@
 package com.example.restaurantapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,19 +36,20 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     EditText mSearch;
     String mCityName;
-
+    ImageView mSearchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mSearch = findViewById(R.id.searchRestaurant);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        mSearchView = findViewById(R.id.searchView);
 
         mSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         mSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent event) {
-                Toast.makeText(getApplicationContext(),"Hello Wrold",Toast.LENGTH_LONG).show();
                 if(mSearch.getText().toString().trim().length() > 0){
                     mCityName = mSearch.getText().toString().trim();
                     initRequest();
@@ -50,7 +57,25 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"hello world", Toast.LENGTH_LONG).show();
+                hideKeyboard();
+                if(mSearch.getText().toString().trim().length() > 0){
+                    mCityName = mSearch.getText().toString().trim();
+                    initRequest();
+                }
+            }
+        });
         //mRecyclerView.setAdapter();
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputManager != null) {
+            inputManager.toggleSoftInput(0, 0);
+        }
     }
 
     private void initRequest() {
@@ -83,5 +108,4 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request);
         Log.d("URL",""+request.getUrl());
     }
-
 }
