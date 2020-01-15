@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class Review implements Serializable
+class Review implements Serializable
 {
 
     @SerializedName("review")

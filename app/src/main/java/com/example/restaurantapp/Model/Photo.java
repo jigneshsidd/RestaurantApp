@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Photo implements Serializable
+class Photo implements Serializable
 {
     @SerializedName("photo")
     @Expose
